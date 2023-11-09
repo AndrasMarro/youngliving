@@ -1,0 +1,69 @@
+<script setup>
+import { ref } from 'vue';
+// import { storeToRefs } from 'pinia';
+import { useMyStore } from '../stores/myStore';
+
+const myStore = useMyStore();
+const slide = ref('1');
+const expanded = ref(false);
+</script>
+
+<template>
+  <q-responsive :ratio="1.777">
+    <q-carousel animated infinite :autoplay="4000" v-model="slide">
+      <q-carousel-slide name="1" img-src="/assets/slideshow/1.jpg" />
+      <q-carousel-slide name="2" img-src="/assets/slideshow/2.jpg" />
+      <q-carousel-slide name="3" img-src="/assets/slideshow/3.jpg" />
+      <q-carousel-slide name="4" img-src="/assets/slideshow/4.jpg" />
+      <q-carousel-slide name="5" img-src="/assets/slideshow/5.jpg" />
+    </q-carousel>
+  </q-responsive>
+  <div class="row">
+    <div
+      class="q-px-xl q-py-lg col-sm-6 col-md-4 col-lg-3"
+      v-for="a in myStore.articles"
+      :key="a.id"
+    >
+      <q-card class="my-card" bordered>
+        <q-img :src="`/assets/images/intro/${a.image}`" />
+
+        <q-card-section>
+          <div class="text-h6 text-grey-9 card-title-box">{{ a.title }}</div>
+          <div class="text-caption text-grey-9">
+            {{ a.text.substring(0, 125) + (a.text.length > 10 ? '...' : '') }}
+          </div>
+        </q-card-section>
+
+        <q-card-actions>
+          <q-space></q-space>
+          <q-btn
+            color="grey"
+            flat
+            dense
+            :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+            @click="expanded = !expanded"
+            label="Read more..."
+          />
+        </q-card-actions>
+
+        <q-slide-transition>
+          <div v-show="expanded">
+            <q-separator />
+            <q-card-section class="text-grey-9">
+              {{ a.text }}
+            </q-card-section>
+          </div>
+        </q-slide-transition>
+      </q-card>
+    </div>
+  </div>
+</template>
+
+<style lang="sass">
+.my-card
+  width: 300px
+  height: 530px
+
+.card-title-box
+  height: 80px
+</style>
