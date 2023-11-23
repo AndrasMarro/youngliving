@@ -1,6 +1,6 @@
 <script setup>
 import Drawer from './components/SideBar.vue';
-import { DrawerOpen } from './utils/sideBarToggle.js';
+import { DrawerOpen } from './utils/Toggles.js';
 
 const toggleDrawer = () => {
   DrawerOpen.value = !DrawerOpen.value;
@@ -19,10 +19,10 @@ const toggleDrawer = () => {
           spinner-color="primary"
           fit="contain"
           height="70px"
-          class="q-mt-md q-mb-lg q-ml-xl gt-md block"
+          class="q-mt-md q-mb-lg q-ml-xl gt-xs"
           spinner-size="40px"
         />
-        <q-btn dense flat label="PLEASE LOGIN" class="gt-md block" style="width: 120px" />
+        <q-btn dense flat label="PLEASE LOGIN" class="gt-md" style="width: 120px" />
         <!-- #endregion -->
         <!-- #region lesser -->
         <q-img
@@ -30,10 +30,10 @@ const toggleDrawer = () => {
           spinner-color="primary"
           fit="contain"
           height="60px"
-          class="q-my-md q-ml-xl lt-md block"
+          class="q-my-md q-ml-xl lt-sm"
           spinner-size="40px"
         />
-        <q-btn dense flat round label="PLEASE LOGIN" class="lt-md block" style="width: 150px" />
+        <q-btn dense flat round label="PLEASE LOGIN" class="lt-md" style="width: 175px" />
         <!-- #endregion -->
       </q-toolbar>
     </q-header>
@@ -65,6 +65,15 @@ const toggleDrawer = () => {
 .icons {
   opacity: 75%;
   width: 24px;
+}
+
+.q-img {
+  -drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 /* * {

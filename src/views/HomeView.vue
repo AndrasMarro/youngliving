@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-// import { storeToRefs } from 'pinia';
 import { useMyStore } from '../stores/myStore';
+import { showDialog } from '../utils/Toggles.js';
+import ArticleDialogue from '../components/ArticleDialogue.vue';
 
 const myStore = useMyStore();
 const slide = ref('1');
@@ -17,12 +18,8 @@ const slide = ref('1');
       <q-carousel-slide name="5" img-src="/assets/slideshow/5.jpg" />
     </q-carousel>
   </q-responsive>
-  <div class="row">
-    <div
-      class="q-px-xl q-py-lg col-sm-6 col-md-4 col-lg-3"
-      v-for="a in myStore.articles"
-      :key="a.id"
-    >
+  <div class="row justify-center q-pa-xl">
+    <div class="q-pa-sm" v-for="a in myStore.articles" :key="a.id">
       <q-card class="my-card" bordered>
         <q-img :src="`/assets/images/intro/${a.image}`" />
 
@@ -35,15 +32,12 @@ const slide = ref('1');
 
         <q-card-actions>
           <q-space></q-space>
-          <q-btn color="grey" label="Read more..." flat dense />
+          <q-btn color="grey" @click="showDialog = !showDialog" label="Read more..." flat dense />
         </q-card-actions>
-
-        <q-slide-transition>
-          <div></div>
-        </q-slide-transition>
       </q-card>
     </div>
   </div>
+  <q-dialog v-model="showDialog"><ArticleDialogue></ArticleDialogue></q-dialog>
 </template>
 
 <style lang="sass">

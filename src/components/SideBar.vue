@@ -1,5 +1,5 @@
 <script setup>
-import { DrawerOpen } from '../utils/sideBarToggle.js';
+import { DrawerOpen } from '../utils/Toggles.js';
 </script>
 
 <template>
