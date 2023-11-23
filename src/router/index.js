@@ -25,6 +25,11 @@ const router = createRouter({
       name: 'search',
       component: () => import('../views/SearchView.vue'),
     },
+    {
+      path: '/not-there',
+      name: 'not-there',
+      component: () => import('../views/NotThere.vue'),
+    },
   ],
 });
 

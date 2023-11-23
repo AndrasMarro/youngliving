@@ -5,7 +5,6 @@ import { useMyStore } from '../stores/myStore';
 
 const myStore = useMyStore();
 const slide = ref('1');
-const expanded = ref(false);
 </script>
 
 <template>
@@ -36,23 +35,11 @@ const expanded = ref(false);
 
         <q-card-actions>
           <q-space></q-space>
-          <q-btn
-            color="grey"
-            flat
-            dense
-            :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-            @click="expanded = !expanded"
-            label="Read more..."
-          />
+          <q-btn color="grey" label="Read more..." flat dense />
         </q-card-actions>
 
         <q-slide-transition>
-          <div v-show="expanded">
-            <q-separator />
-            <q-card-section class="text-grey-9">
-              {{ a.text }}
-            </q-card-section>
-          </div>
+          <div></div>
         </q-slide-transition>
       </q-card>
     </div>

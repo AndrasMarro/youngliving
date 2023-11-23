@@ -1,26 +1,28 @@
 <script setup>
-import { ref } from 'vue';
+import Drawer from './components/SideBar.vue';
+import { DrawerOpen } from './utils/sideBarToggle.js';
 
-const leftDrawerOpen = ref(false);
-const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value);
+const toggleDrawer = () => {
+  DrawerOpen.value = !DrawerOpen.value;
+};
 </script>
 
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- #region header -->
+    <!-- #region HEADER -->
     <q-header elevated class="bg-white text-primary">
       <q-toolbar class="q-px-lg">
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <q-btn dense flat round icon="menu" @click="toggleDrawer" />
         <!-- #region greater -->
         <q-img
           src="/Young-Living-Logo.svg"
           spinner-color="primary"
           fit="contain"
           height="70px"
-          class="q-my-md gt-md block"
+          class="q-mt-md q-mb-lg q-ml-xl gt-md block"
           spinner-size="40px"
         />
-        <q-btn dense flat round label="PLEASE LOGIN" class="gt-md block" style="width: 110px" />
+        <q-btn dense flat label="PLEASE LOGIN" class="gt-md block" style="width: 120px" />
         <!-- #endregion -->
         <!-- #region lesser -->
         <q-img
@@ -28,7 +30,7 @@ const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value);
           spinner-color="primary"
           fit="contain"
           height="60px"
-          class="q-my-md lt-md block"
+          class="q-my-md q-ml-xl lt-md block"
           spinner-size="40px"
         />
         <q-btn dense flat round label="PLEASE LOGIN" class="lt-md block" style="width: 150px" />
@@ -37,73 +39,8 @@ const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value);
     </q-header>
     <!-- #endregion -->
 
-    <q-drawer v-model="leftDrawerOpen" side="left" bordered :width="250" class="text-primary">
-      <q-toolbar class="q-ml-sm q-mt-md">
-        <q-toolbar-title class="text-grey-6 text-subtitle2">EXPLORE OUR SITE</q-toolbar-title>
-      </q-toolbar>
-      <!-- #region EXPLORE OUR SITE - links -->
-      <q-list class="text-grey-9">
-        <q-item clickable v-ripple to="/">
-          <q-item-section avatar>
-            <q-icon name="home" />
-          </q-item-section>
-          <q-item-section> Homepage </q-item-section>
-        </q-item>
-        <q-item clickable v-ripple to="/essential-oils">
-          <q-item-section avatar>
-            <q-icon name="opacity" />
-          </q-item-section>
-          <q-item-section> Essential Oils </q-item-section>
-        </q-item>
-        <q-item clickable v-ripple to="/search">
-          <q-item-section avatar>
-            <q-icon name="search" />
-          </q-item-section>
-          <q-item-section> Search Products </q-item-section>
-        </q-item>
-        <q-item clickable v-ripple to="/about">
-          <q-item-section avatar>
-            <q-icon name="people" />
-          </q-item-section>
-          <q-item-section> About Us </q-item-section>
-        </q-item>
-      </q-list>
-      <!-- #endregion -->
-
-      <q-toolbar class="q-ml-sm q-mt-md">
-        <q-toolbar-title class="text-grey-6 text-subtitle2">CONTACT US</q-toolbar-title>
-      </q-toolbar>
-      <!-- #region ABOUT US - links -->
-      <q-list class="text-grey-9">
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="mail" />
-          </q-item-section>
-          <q-item-section> Email </q-item-section>
-        </q-item>
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="facebook" />
-          </q-item-section>
-          <q-item-section> Facebook </q-item-section>
-        </q-item>
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="close" />
-          </q-item-section>
-          <q-item-section> X </q-item-section>
-        </q-item>
-        <q-item clickable v-ripple>
-          <q-item-section avatar>
-            <q-icon name="photo_camera" />
-          </q-item-section>
-          <q-item-section> Instagram </q-item-section>
-        </q-item>
-      </q-list>
-      <!-- #endregion -->
-    </q-drawer>
-
     <q-page-container>
+      <Drawer></Drawer>
       <router-view />
     </q-page-container>
   </q-layout>
@@ -123,6 +60,11 @@ const toggleLeftDrawer = () => (leftDrawerOpen.value = !leftDrawerOpen.value);
 @font-face {
   font-family: 'LibreBodoni';
   src: url('/fonts/LibreBodoni/LibreBodoni-Regular.ttf') format('truetype');
+}
+
+.icons {
+  opacity: 75%;
+  width: 24px;
 }
 
 /* * {
