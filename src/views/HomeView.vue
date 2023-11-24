@@ -6,6 +6,7 @@ import ArticleDialogue from '../components/ArticleDialogue.vue';
 
 const myStore = useMyStore();
 const slide = ref('1');
+const selectedDialogue = ref(null);
 </script>
 
 <template>
@@ -32,12 +33,23 @@ const slide = ref('1');
 
         <q-card-actions>
           <q-space></q-space>
-          <q-btn color="grey" @click="showDialog = !showDialog" label="Read more..." flat dense />
+          <q-btn
+            color="grey"
+            @click="
+              showDialog = !showDialog;
+              selectedDialogue = a;
+            "
+            label="Read more..."
+            flat
+            dense
+          />
         </q-card-actions>
       </q-card>
     </div>
+    <q-dialog v-model="showDialog"
+      ><ArticleDialogue :article="selectedDialogue"></ArticleDialogue
+    ></q-dialog>
   </div>
-  <q-dialog v-model="showDialog"><ArticleDialogue></ArticleDialogue></q-dialog>
 </template>
 
 <style lang="sass">
