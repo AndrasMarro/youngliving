@@ -25,7 +25,11 @@ const likes = ref(0);
 
     <q-card-actions>
       <div class="column q-ml-sm rounded-borders">
-        <q-btn flat icon="favorite" @click="likes = this.articles.likes + 1" />
+        <q-btn
+          flat
+          icon="favorite"
+          @click="likes >= article.likes ? likes++ : (likes = article.likes + 1)"
+        />
         <span round class="q-mx-sm text-center">{{ likes > 0 ? likes : article.likes }}</span>
       </div>
       <q-space></q-space>
