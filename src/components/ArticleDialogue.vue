@@ -1,19 +1,22 @@
 <script setup>
+import { ref } from 'vue';
+import { showDialog } from '../utils/Toggles.js';
 defineProps({ article: Object });
+
+const likes = ref(0);
 </script>
 
 <template>
-  <q-card class="my-card" style="width: 700px; height: 300px" flat bordered>
+  <q-card class="my-card" style="width: auto; height: auto" flat bordered>
     <q-card-section horizontal>
       <q-card-section class="col-5 flex flex-center">
         <q-img class="rounded-borders" :src="`/assets/images/intro/${article.image}`" />
       </q-card-section>
       <q-card-section class="q-pt-xs">
-        <div class="text-overline">{{ article.title }}</div>
+        <div class="text-overline q-mt-sm">{{ article.date }}</div>
         <div class="text-h5 q-mt-sm q-mb-xs">{{ article.title }}</div>
         <div class="text-caption text-grey">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.
+          {{ article.text }}
         </div>
       </q-card-section>
     </q-card-section>
@@ -21,10 +24,12 @@ defineProps({ article: Object });
     <q-separator />
 
     <q-card-actions>
+      <div class="column q-ml-sm rounded-borders">
+        <q-btn flat icon="favorite" @click="likes = this.articles.likes + 1" />
+        <span round class="q-mx-sm text-center">{{ likes > 0 ? likes : article.likes }}</span>
+      </div>
       <q-space></q-space>
-      <q-btn flat icon="favorite" class="bg-teal-3">
-        <span class="q-mx-md">{{ article.likes }}</span></q-btn
-      >
+      <q-btn outline @click="showDialog = !showDialog" style="opacity: 50%">ok</q-btn>
     </q-card-actions>
   </q-card>
 </template>
