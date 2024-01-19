@@ -18,6 +18,6 @@ export const useMyStore = defineStore('myStore', () => {
   getData(path).then((data) => {
     if (data) articles.value = data;
   });
-  
+
   return { articles };
 });
