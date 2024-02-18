@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import { useQuasar } from 'quasar';
-import { myProductStore } from '../stores/products.js';
+import { useProductsStore } from '../stores/products.js';
 import { showDialog } from '../utils/Toggles.js';
 import ProductDialog from '../components/ProductDialog.vue';
 
 const $q = useQuasar();
 const filter = ref('');
-const productStore = myProductStore();
+const productStore = useProductsStore();
 const selectedDialog = ref(null);
 
 const filteredColumns = () => {
@@ -23,11 +23,13 @@ const columns = [
     sortable: true,
     align: 'center',
     format: (val) => `${val}`,
+    field: (row) => row.itemNumber,
   },
   {
     name: 'image',
     label: 'Image',
     align: 'center',
+    field: 'image',
   },
   {
     name: 'name',
@@ -35,12 +37,14 @@ const columns = [
     label: 'Name',
     sortable: true,
     align: 'left',
+    field: 'name',
   },
   {
     name: 'category',
     label: 'Category',
     sortable: true,
     align: 'left',
+    field: 'category',
   },
   {
     name: 'price',
@@ -48,6 +52,7 @@ const columns = [
     label: 'Price',
     sortable: true,
     align: 'center',
+    field: 'price',
   },
 ];
 </script>
