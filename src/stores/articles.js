@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const useMyStore = defineStore('myStore', () => {
+export const myArticleStore = defineStore('articleStore', () => {
   async function getData(path) {
     try {
       const response = await fetch(path);

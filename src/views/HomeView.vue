@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import { useMyStore } from '../stores/myStore';
+import { myArticleStore } from '../stores/articles.js';
 import { showDialog } from '../utils/Toggles.js';
-import ArticleDialogue from '../components/ArticleDialogue.vue';
+import ArticleDialog from '../components/ArticleDialog.vue';
 
-const myStore = useMyStore();
+const articleStore = myArticleStore();
 const slide = ref('1');
-const selectedDialogue = ref(null);
+const selectedDialog = ref(null);
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const selectedDialogue = ref(null);
     </q-carousel>
   </q-responsive>
   <div class="row justify-center q-pa-xl">
-    <div class="q-pa-sm" v-for="a in myStore.articles" :key="a.id">
+    <div class="q-pa-sm" v-for="a in articleStore.articles" :key="a.id">
       <q-card class="my-card" bordered>
         <q-img :src="`/assets/images/intro/${a.image}`" />
 
@@ -37,7 +37,7 @@ const selectedDialogue = ref(null);
             color="grey"
             @click="
               showDialog = !showDialog;
-              selectedDialogue = a;
+              selectedDialog = a;
             "
             label="Read more..."
             flat
@@ -47,7 +47,7 @@ const selectedDialogue = ref(null);
       </q-card>
     </div>
     <q-dialog v-model="showDialog"
-      ><ArticleDialogue :article="selectedDialogue"></ArticleDialogue
+      ><ArticleDialog :article="selectedDialog"></ArticleDialog
     ></q-dialog>
   </div>
 </template>

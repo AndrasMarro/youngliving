@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
 import { showDialog } from '../utils/Toggles.js';
-defineProps({ article: Object });
+const props = defineProps({ article: Object });
 
-const likes = ref(0);
+const liked = ref([false]);
+const toggleLike = () => (liked.value = !liked.value);
 </script>
 
 <template>
@@ -25,12 +26,10 @@ const likes = ref(0);
 
     <q-card-actions>
       <div class="column q-ml-sm rounded-borders">
-        <q-btn
-          flat
-          icon="favorite"
-          @click="likes >= article.likes ? likes++ : (likes = article.likes + 1)"
-        />
-        <span round class="q-mx-sm text-center">{{ likes > 0 ? likes : article.likes }}</span>
+        <q-btn flat icon="favorite" @click="toggleLike()" />
+        <span round class="q-mx-sm text-center">{{
+          liked ? article.likes + 1 : article.likes
+        }}</span>
       </div>
       <q-space></q-space>
       <q-btn outline @click="showDialog = !showDialog" style="opacity: 50%">ok</q-btn>

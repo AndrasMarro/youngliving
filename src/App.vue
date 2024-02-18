@@ -2,9 +2,7 @@
 import Drawer from './components/SideBar.vue';
 import { DrawerOpen } from './utils/Toggles.js';
 
-const toggleDrawer = () => {
-  DrawerOpen.value = !DrawerOpen.value;
-};
+const toggleDrawer = () => (DrawerOpen.value = !DrawerOpen.value);
 </script>
 
 <template>
@@ -13,7 +11,7 @@ const toggleDrawer = () => {
     <q-header elevated class="bg-white text-primary">
       <q-toolbar class="q-px-lg">
         <q-btn dense flat round icon="menu" @click="toggleDrawer" />
-        <!-- #region greater -->
+        <!-- #region greater logo -->
         <q-img
           src="/Young-Living-Logo.svg"
           spinner-color="primary"
@@ -24,7 +22,7 @@ const toggleDrawer = () => {
         />
         <q-btn dense flat label="PLEASE LOGIN" class="gt-md" style="width: 120px" />
         <!-- #endregion -->
-        <!-- #region lesser -->
+        <!-- #region lesser logo -->
         <q-img
           src="/Young-Living-Logo small.svg"
           spinner-color="primary"
