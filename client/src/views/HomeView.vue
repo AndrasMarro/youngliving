@@ -2,11 +2,14 @@
 import { ref } from 'vue';
 import { showDialog } from '../utils/Toggles.js';
 import ArticleDialog from '../components/ArticleDialog.vue';
+import { useArticlesStore } from '../stores/articles.js';
+import { storeToRefs } from 'pinia';
 
-import articles from '/assets/data/articles.json';
+const articleStore = useArticlesStore();
+const { articles } = storeToRefs(articleStore);
 
-const slide = ref('1');
 const selectedDialog = ref(null);
+const slide = ref(1);
 </script>
 
 <template>
@@ -25,7 +28,9 @@ const selectedDialog = ref(null);
         <q-img :src="`/assets/images/intro/${a.image}`" />
 
         <q-card-section>
-          <div class="text-h6 text-grey-9 card-title-box">{{ a.title }}</div>
+          <div class="text-h6 text-grey-9 card-title-box q-mb-md">
+            {{ a.title }}
+          </div>
           <div class="text-caption text-grey-9">
             {{ a.text.substring(0, 125) + (a.text.length > 10 ? '...' : '') }}
           </div>
@@ -55,7 +60,7 @@ const selectedDialog = ref(null);
 <style lang="sass">
 .my-card
   width: 300px
-  height: 530px
+  height: 550px
 
 .card-title-box
   height: 80px
