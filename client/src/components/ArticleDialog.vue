@@ -14,7 +14,8 @@ const toggleLike = async () => {
   await axios.patch(`${host.value}/articles/${prop.article.id}`, {
     likes: `${prop.article.likes + 1}`,
   });
-  newLikes.value = prop.article.likes + 1;
+  console.log(await articleStore.likesById(prop.article.id));
+  newLikes.value = await articleStore.likesById(prop.article.id);
 };
 </script>
 

@@ -1,9 +1,10 @@
 import { dbgetArticles, dbgetArticlesbyId, dbupdateLikesbyId } from '../models/articles.js';
 
 const getArticles = async (req, res) => {
+  const { id } = req.params;
   let result = null;
 
-  result = await dbgetArticles();
+  result = id ? await dbgetArticlesbyId(id) : await dbgetArticles();
   res.status(200).json(result.rows);
 };
 const patchLikes = async (req, res) => {
@@ -15,10 +16,10 @@ const patchLikes = async (req, res) => {
   console.log(likes);
   let check = null;
 
-  dbupdateLikesbyId(id, likes);
+  await dbupdateLikesbyId(id, likes);
   check = await dbgetArticlesbyId(id);
-  if (check.rows[0].likes === likes) res.status(200);
-  res.status(400);
+  if (check.rows[0].likes !== likes) res.status(200).json('likes updated!');
+  res.status(202).json('no change');
 };
 
 export { getArticles, patchLikes };

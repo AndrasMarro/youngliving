@@ -6,6 +6,7 @@ import { getArticles, patchLikes } from '../controllers/articles.js';
 const router = express.Router();
 
 router.get('/', asyncHandler(getArticles));
+router.get('/:id', asyncHandler(getArticles));
 router.patch('/:id', asyncHandler(patchLikes));
 
 export default router;
